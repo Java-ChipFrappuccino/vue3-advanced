@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2>{{ form.title }}</h2>
-    <p>{{ form.content }}</p>
-    <p class="text-muted">{{ form.createdAt }}</p>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p class="text-muted">{{ post.createdAt }}</p>
     <hr class="my-4" />
     <div class="row g-2">
       <div class="col-auto">
@@ -20,18 +20,18 @@
         <button class="btn btn-outline-success" @click="goEdit">수정</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger">삭제</button>
+        <button class="btn btn-outline-danger" @click="remove">삭제</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-import { getPostById } from "@/api/posts";
+import { deletePost, getPostById } from "@/api/posts";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 const router = useRouter();
-const form = ref({});
+const post = ref({});
 
 const props = defineProps({
   id: {
@@ -40,12 +40,31 @@ const props = defineProps({
   },
 });
 
-const fetchPost = () => {
-  const data = getPostById(props.id);
-  form.value = { ...data };
+const fetchPost = async () => {
+  try {
+    const { data } = await getPostById(props.id);
+    // post.value = { ...data }; //객체를 통째로 넣어도 되지만 어떤값이 올지 모르니 필요한 값만 담을수 있게 만듬
+    setPost(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+const setPost = ({ title, content, createdAt }) => {
+  post.value.title = title;
+  post.value.content = content;
+  post.value.createdAt = createdAt;
 };
 fetchPost();
 
+const remove = async () => {
+  try {
+    if (confirm("삭제하시겠습니까?") === false) return;
+    await deletePost(props.id);
+    router.push({ name: "PostList" });
+  } catch (error) {
+    console.error(error);
+  }
+};
 const goList = () => {
   router.push({
     name: "PostList",

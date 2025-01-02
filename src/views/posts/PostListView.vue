@@ -24,12 +24,22 @@ import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
 import AppCard from "@/components/AppCard.vue";
 import { ref } from "vue";
-import { getPost } from "@/api/posts";
+import { getPosts } from "@/api/posts";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const posts = ref([]);
-posts.value = getPost();
+
+const fetchPosts = async () => {
+  try {
+    const { data } = await getPosts();
+    posts.value = data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+fetchPosts();
+
 const goPage = (id) => {
   router.push({
     //주소값에 이름이 있다면 주소값으로 객체를 넣어줄수도 있다
