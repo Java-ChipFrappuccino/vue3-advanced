@@ -2,7 +2,11 @@
   <div>
     <h2>게시글 목록</h2>
     <hr class="my-4" />
-    <AppFilter @submit.prevent="" v-model:limit="params._limit" />
+    <AppFilter
+      @submit.prevent=""
+      v-model:limit="params._limit"
+      v-model:title_like="params.title_like"
+    />
     <!-- <form action="" @submit.prevent="">
       <div class="row g-3">
         <div class="col">

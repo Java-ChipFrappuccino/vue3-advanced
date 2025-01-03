@@ -16,13 +16,10 @@
 </template>
 
 <script setup>
-defineEmits(["change", "update"]);
+defineEmits(["update:limit", "update:titleLike"]);
 defineProps({
-  foo: String,
-  bar: {
-    type: Number,
-    required: true,
-  },
+  titleLike: String,
+  limit: Number,
 });
 </script>
 
