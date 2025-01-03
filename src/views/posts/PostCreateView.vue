@@ -3,37 +3,32 @@
     <h2>게시글 작성</h2>
     <hr class="my-4" />
   </div>
-  <form @submit.prevent="save">
-    <div class="mb-3">
-      <label for="title" class="form-label">제목</label>
-      <input v-model="form.title" type="text" class="form-control" id="title" />
-    </div>
-    <div class="mb-3">
-      <label for="content" class="form-label">내용</label>
-      <textarea
-        v-model="form.content"
-        class="form-control"
-        id="content"
-        rows="3"
-      ></textarea>
-    </div>
-    <div class="pt-4">
-      <button
-        type="button"
-        class="btn btn-outline-secondary me-2"
-        @click="goList"
-      >
-        목록
-      </button>
-      <button class="btn btn-outline-success">저장</button>
-    </div>
-  </form>
+  <PostForm
+    @submit.prevent="save"
+    v-model:title="form.title"
+    v-model:content="form.content"
+  >
+    <template #actions>
+      <div class="pt-4">
+        <button
+          type="button"
+          class="btn btn-outline-secondary me-2"
+          @click="goList"
+        >
+          목록
+        </button>
+        <button class="btn btn-outline-success">저장</button>
+      </div>
+    </template>
+  </PostForm>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { createPost } from "@/api/posts";
+import dayjs from "dayjs";
+import PostForm from "@/components/posts/PostForm.vue";
 const router = useRouter();
 const form = ref({
   title: null,
@@ -41,7 +36,10 @@ const form = ref({
 });
 const save = async () => {
   try {
-    await createPost({ ...form.value, createdAt: Date.now() });
+    await createPost({
+      ...form.value,
+      createdAt: dayjs().format("YYYY-MM-DD"),
+    });
     router.push({ name: "PostList" });
   } catch (error) {
     console.error(error);

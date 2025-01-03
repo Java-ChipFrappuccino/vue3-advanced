@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import { posts } from ".";
 
 // const posts = [
 //   {
@@ -28,22 +29,22 @@ import axios from "axios";
 //   },
 // ];
 
-export function getPosts() {
-  return axios.get("http://localhost:3000/posts");
+export function getPosts(params) {
+  return posts.get("", { params }); //2번째 인자로 params객체를 넣어주면 쿼리스트링으로 변환해줌
 }
 
 export function getPostById(id) {
-  return axios.get(`http://localhost:3000/posts/${id}`);
+  return posts.get(`/${id}`);
 }
 
 export function createPost(data) {
-  return axios.post("http://localhost:3000/posts", data);
+  return posts.post("", data);
 }
 
 export function updatePost(id, data) {
-  return axios.put(`http://localhost:3000/posts/${id}`, data);
+  return posts.put(`/${id}`, data);
 }
 
 export function deletePost(id) {
-  return axios.delete(`http://localhost:3000/posts/${id}`);
+  return posts.delete(`/${id}`);
 }

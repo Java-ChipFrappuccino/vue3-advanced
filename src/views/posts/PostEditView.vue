@@ -3,7 +3,7 @@
     <h2>게시글 수정</h2>
     <hr class="my-4" />
   </div>
-  <form @submit.prevent="edit">
+  <!-- <form @submit.prevent="edit">
     <div class="mb-3">
       <label for="title" class="form-label">제목</label>
       <input v-model="form.title" type="text" class="form-control" id="title" />
@@ -27,13 +27,32 @@
       </button>
       <button class="btn btn-outline-success">수정</button>
     </div>
-  </form>
+  </form> -->
+  <PostForm
+    @submit.prevent="edit"
+    v-model:title="form.title"
+    v-model:content="form.content"
+  >
+    <template #actions>
+      <div class="pt-4">
+        <button
+          type="button"
+          class="btn btn-outline-secondary me-2"
+          @click="goDetail"
+        >
+          목록
+        </button>
+        <button class="btn btn-outline-success">저장</button>
+      </div>
+    </template>
+  </PostForm>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getPostById, updatePost } from "@/api/posts";
+import PostForm from "@/components/posts/PostForm.vue";
 const route = useRoute();
 const router = useRouter();
 const props = defineProps({
@@ -46,6 +65,7 @@ const props = defineProps({
 const form = ref({
   title: null,
   content: null,
+  createdAt: null,
 });
 const fetchPost = async () => {
   try {
@@ -56,9 +76,10 @@ const fetchPost = async () => {
     console.error(error);
   }
 };
-const setForm = ({ title, content }) => {
+const setForm = ({ title, content, createdAt }) => {
   form.value.title = title;
   form.value.content = content;
+  form.value.createdAt = createdAt;
 };
 fetchPost();
 const edit = async () => {
