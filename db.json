@@ -13,8 +13,8 @@
       "id": 4
     },
     {
-      "title": "제목 9999",
-      "content": "내용 9999",
+      "title": "제목 99995",
+      "content": "내용 99995",
       "createdAt": "2025-04-01",
       "id": 8
     },
@@ -43,8 +43,8 @@
       "id": 12
     },
     {
-      "title": "더미",
-      "content": "데이터",
+      "title": "더미3",
+      "content": "데이터3",
       "createdAt": "2025-06-03",
       "id": 13
     },
@@ -61,34 +61,16 @@
       "id": 15
     },
     {
-      "title": null,
-      "content": null,
-      "createdAt": "2025-01-03",
-      "id": 16
-    },
-    {
-      "title": null,
-      "content": null,
-      "createdAt": "2025-01-03",
-      "id": 17
-    },
-    {
-      "title": null,
-      "content": "ㄴㅇㄹㄴㅇㄹㅇㄴㄹㄴㅇㄹ",
-      "createdAt": "2025-01-03",
-      "id": 20
-    },
-    {
-      "title": null,
-      "content": "ㅈㄷㄱㅈㄱ",
-      "createdAt": "2025-01-03",
-      "id": 21
-    },
-    {
       "title": "777",
       "content": "77777",
       "createdAt": "2025-01-03",
       "id": 22
+    },
+    {
+      "title": "ㅅㅅㅅ",
+      "content": "ㅅㅅㅅㅅㅅ",
+      "createdAt": "2025-01-05",
+      "id": 23
     }
   ]
 }

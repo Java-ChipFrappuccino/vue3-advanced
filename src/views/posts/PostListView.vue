@@ -2,10 +2,10 @@
   <div>
     <h2>게시글 목록</h2>
     <hr class="my-4" />
-    <AppFilter
+    <PostFilter
       @submit.prevent=""
       v-model:limit="params._limit"
-      v-model:title_like="params.title_like"
+      v-model:title-like="params.title_like"
     />
     <!-- <form action="" @submit.prevent="">
       <div class="row g-3">
@@ -22,16 +22,16 @@
       </div>
     </form> -->
     <hr class="my-4" />
-    <div class="row g-3">
-      <div v-for="item in posts" :key="item.id" class="col-4">
+    <AppGrid :items="posts">
+      <template v-slot="{ item }">
         <PostItem
           :title="item.title"
           :content="item.content"
           :created-at="item.createdAt"
           @click="goPage(item.id)"
         />
-      </div>
-    </div>
+      </template>
+    </AppGrid>
     <AppPagination v-model:current-page="params._page" :page-count="pageCount">
     </AppPagination>
     <hr class="my-4" />
@@ -45,8 +45,9 @@
 import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
 import AppCard from "@/components/AppCard.vue";
+import AppGrid from "@/components/AppGrid.vue";
 import AppPagination from "@/components/AppPagination.vue";
-import AppFilter from "@/components/AppFilter.vue";
+import PostFilter from "@/components/posts/PostFilter.vue";
 import { computed, ref, watchEffect } from "vue";
 import { getPosts } from "@/api/posts";
 import { useRouter } from "vue-router";
