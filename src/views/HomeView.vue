@@ -11,9 +11,9 @@
 </template>
 
 <script setup>
-import DrawingComp from "@/components/DrawingComp.vue";
-import AppGrid from "@/components/AppGrid.vue";
-import AppCard from "@/components/AppCard.vue";
+import DrawingComp from "@/components/app/DrawingComp.vue";
+// import AppGrid from "@/components/app/AppGrid.vue";
+// import AppCard from "@/components/app/AppCard.vue";
 import { ref } from "vue";
 const items = ref(["사과", "딸기", "바나나", "파인애플"]);
 </script>

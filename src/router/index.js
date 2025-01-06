@@ -10,6 +10,9 @@ import NestedView from "@/views/nested/NestedView.vue";
 import NestedOneView from "@/views/nested/NestedOneView.vue";
 import NestedTwoView from "@/views/nested/NestedTwoView.vue";
 import NestedHomeView from "@/views/nested/NestedHomeView.vue";
+import NestedOneHomeView from "@/views/nested/NestedOneHomeView.vue";
+import NestedOneAndOneView from "@/views/nested/NestedOneAndOneView.vue";
+import NestedOneAndTwoView from "@/views/nested/NestedOneAndTwoView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +65,24 @@ const router = createRouter({
           path: "one",
           name: "NestedOne",
           component: NestedOneView,
+          redirect: { name: "NestedOneHome" },
+          children: [
+            {
+              path: "",
+              name: "NestedOneHome",
+              component: NestedOneHomeView,
+            },
+            {
+              path: "one/1",
+              name: "NestedOneAndOne",
+              component: NestedOneAndOneView,
+            },
+            {
+              path: "one/2",
+              name: "NestedOneAndTwo",
+              component: NestedOneAndTwoView,
+            },
+          ],
         },
         {
           path: "two",

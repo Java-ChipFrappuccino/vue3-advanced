@@ -29,11 +29,37 @@
           :content="item.content"
           :created-at="item.createdAt"
           @click="goPage(item.id)"
+          @modal="openModal(item)"
         />
       </template>
     </AppGrid>
     <AppPagination v-model:current-page="params._page" :page-count="pageCount">
     </AppPagination>
+    <!-- <AppModal v-model="show" title="게시글">
+      <template #default>
+        <div class="row g-3">
+          <div class="col-3 text-muted">제목</div>
+          <div class="col-9">{{ modalTitle }}</div>
+          <div class="col-3 text-muted">내용</div>
+          <div class="col-9">{{ modalContent }}</div>
+          <div class="col-3 text-muted">등록일</div>
+          <div class="col-9">{{ modalCreatedAt }}</div>
+        </div>
+      </template>
+      <template #actions>
+        <button @click="show = !show" type="button" class="btn btn-secondary">
+          닫기
+        </button>
+      </template>
+    </AppModal> -->
+    <Teleport to="#modal">
+      <PostModal
+        v-model="show"
+        :title="modalTitle"
+        :content="modalContent"
+        :created-at="modalCreatedAt"
+      ></PostModal>
+    </Teleport>
     <hr class="my-4" />
     <AppCard>
       <PostDetailView :id="1" />
@@ -44,9 +70,10 @@
 <script setup>
 import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
-import AppCard from "@/components/AppCard.vue";
-import AppGrid from "@/components/AppGrid.vue";
-import AppPagination from "@/components/AppPagination.vue";
+// import AppCard from "@/components/app/AppCard.vue";
+// import AppGrid from "@/components/app/AppGrid.vue";
+import PostModal from "@/components/posts/PostModal.vue";
+// import AppPagination from "@/components/app/AppPagination.vue";
 import PostFilter from "@/components/posts/PostFilter.vue";
 import { computed, ref, watchEffect } from "vue";
 import { getPosts } from "@/api/posts";
@@ -78,6 +105,19 @@ const fetchPosts = async () => {
     console.error(error);
   }
 };
+
+// 모달 관련
+const show = ref(false);
+const modalTitle = ref("");
+const modalContent = ref("");
+const modalCreatedAt = ref("");
+const openModal = ({ title, content, createdAt }) => {
+  show.value = true;
+  modalTitle.value = title;
+  modalContent.value = content;
+  modalCreatedAt.value = createdAt;
+};
+
 // fetchPosts();
 watchEffect(fetchPosts);
 const goPage = (id) => {

@@ -2,7 +2,7 @@
   "posts": [
     {
       "title": "신년5",
-      "content": "추카추카",
+      "content": "추카추카~",
       "createdAt": "2025-01-01",
       "id": 1
     },
@@ -13,8 +13,8 @@
       "id": 4
     },
     {
-      "title": "제목 99995",
-      "content": "내용 99995",
+      "title": "제목 999954",
+      "content": "내용 999956",
       "createdAt": "2025-04-01",
       "id": 8
     },
@@ -44,7 +44,7 @@
     },
     {
       "title": "더미3",
-      "content": "데이터3",
+      "content": "데이터36ㅍ",
       "createdAt": "2025-06-03",
       "id": 13
     },
@@ -71,6 +71,36 @@
       "content": "ㅅㅅㅅㅅㅅ",
       "createdAt": "2025-01-05",
       "id": 23
+    },
+    {
+      "title": "신규",
+      "content": "등록",
+      "createdAt": "2025-01-06",
+      "id": 24
+    },
+    {
+      "title": "ㅅㅅ",
+      "content": "ㅅㅅ",
+      "createdAt": "2025-01-06",
+      "id": 25
+    },
+    {
+      "title": "ㅛㅛ",
+      "content": "ㅛㅛ",
+      "createdAt": "2025-01-06",
+      "id": 26
+    },
+    {
+      "title": "ㅅㅅ",
+      "content": "ㅅㅅ",
+      "createdAt": "2025-01-06",
+      "id": 28
+    },
+    {
+      "title": "ㅛㅛ",
+      "content": "ㅛㅛ",
+      "createdAt": "2025-01-06",
+      "id": 29
     }
   ]
 }
