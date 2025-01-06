@@ -22,19 +22,26 @@
       </div>
     </form> -->
     <hr class="my-4" />
-    <AppGrid :items="posts">
-      <template v-slot="{ item }">
-        <PostItem
-          :title="item.title"
-          :content="item.content"
-          :created-at="item.createdAt"
-          @click="goPage(item.id)"
-          @modal="openModal(item)"
-        />
-      </template>
-    </AppGrid>
-    <AppPagination v-model:current-page="params._page" :page-count="pageCount">
-    </AppPagination>
+    <AppLoading v-if="loading"></AppLoading>
+    <AppError v-else-if="error" :message="error.message"></AppError>
+    <template v-else>
+      <AppGrid :items="posts">
+        <template v-slot="{ item }">
+          <PostItem
+            :title="item.title"
+            :content="item.content"
+            :created-at="item.createdAt"
+            @click="goPage(item.id)"
+            @modal="openModal(item)"
+          />
+        </template>
+      </AppGrid>
+      <AppPagination
+        v-model:current-page="params._page"
+        :page-count="pageCount"
+      >
+      </AppPagination>
+    </template>
     <!-- <AppModal v-model="show" title="게시글">
       <template #default>
         <div class="row g-3">
@@ -78,8 +85,12 @@ import PostFilter from "@/components/posts/PostFilter.vue";
 import { computed, ref, watchEffect } from "vue";
 import { getPosts } from "@/api/posts";
 import { useRouter } from "vue-router";
+import AppLoading from "@/components/app/AppLoading.vue";
+import AppError from "@/components/app/AppError.vue";
 
 const router = useRouter();
+const loading = ref(false);
+const error = ref(null);
 const posts = ref([]);
 const params = ref({
   _sort: "createdAt",
@@ -97,12 +108,15 @@ const pageCount = computed(() => {
 });
 const fetchPosts = async () => {
   try {
+    loading.value = true;
     console.log("요청보냄");
     const { data, headers } = await getPosts(params.value);
     posts.value = data;
     totalCount.value = headers["x-total-count"];
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    error.value = err;
+  } finally {
+    loading.value = false;
   }
 };
 

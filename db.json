@@ -13,12 +13,6 @@
       "id": 4
     },
     {
-      "title": "제목 999954",
-      "content": "내용 999956",
-      "createdAt": "2025-04-01",
-      "id": 8
-    },
-    {
       "title": "테스트",
       "content": "테스트 서버입니다\n",
       "createdAt": "2025-01-03",
@@ -41,12 +35,6 @@
       "content": "네이터",
       "createdAt": "2024-05-03",
       "id": 12
-    },
-    {
-      "title": "더미3",
-      "content": "데이터36ㅍ",
-      "createdAt": "2025-06-03",
-      "id": 13
     },
     {
       "title": "오래된",
@@ -73,34 +61,34 @@
       "id": 23
     },
     {
-      "title": "신규",
-      "content": "등록",
+      "title": "ㅕ셔",
+      "content": "럳러\n",
       "createdAt": "2025-01-06",
-      "id": 24
+      "id": 31
     },
     {
       "title": "ㅅㅅ",
-      "content": "ㅅㅅ",
+      "content": "ㅅ쇼",
       "createdAt": "2025-01-06",
-      "id": 25
+      "id": 32
     },
     {
-      "title": "ㅛㅛ",
-      "content": "ㅛㅛ",
+      "title": null,
+      "content": null,
       "createdAt": "2025-01-06",
-      "id": 26
+      "id": 33
     },
     {
-      "title": "ㅅㅅ",
-      "content": "ㅅㅅ",
+      "title": "tt",
+      "content": "tt",
       "createdAt": "2025-01-06",
-      "id": 28
+      "id": 34
     },
     {
-      "title": "ㅛㅛ",
-      "content": "ㅛㅛ",
+      "title": "dfgdfg",
+      "content": "fgfg",
       "createdAt": "2025-01-06",
-      "id": 29
+      "id": 35
     }
   ]
 }

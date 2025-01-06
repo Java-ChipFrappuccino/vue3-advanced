@@ -3,8 +3,10 @@
 
 import { ref } from "vue";
 
+const alerts = ref([]);
+
 function useAlert() {
-  const alerts = ref([]);
+  // const alerts = ref([]);
   const vAlert = (message, type = "error") => {
     // showAlert.value = true;
     // alertMessage.value = messasge;
