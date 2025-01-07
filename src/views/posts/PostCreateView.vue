@@ -44,9 +44,10 @@ import AppError from "@/components/app/AppError.vue";
 import AppAlert from "@/components/app/AppAlert.vue";
 import useAlert from "@/composables/alert";
 import PostForm from "@/components/posts/PostForm.vue";
+import { useAxios } from "@/hooks/useAxios";
 
-const loading = ref(false);
-const error = ref(null);
+// const loading = ref(false);
+// const error = ref(null);
 const router = useRouter();
 const dayjs = inject("dayjs");
 const visibleForm = ref(true);
@@ -55,22 +56,43 @@ const form = ref({
   content: null,
 });
 const { vAlert, vSuccess, alerts } = useAlert();
-const save = async () => {
-  try {
-    loading.value = true;
-    await createPost({
-      ...form.value,
-      createdAt: dayjs().format("YYYY-MM-DD"),
-    });
-    vSuccess("작성완료!");
-    router.push({ name: "PostList" });
-  } catch (err) {
-    vAlert(err);
-    error.value = err;
-  } finally {
-    loading.value = false;
+
+const { error, loading, execute } = useAxios(
+  "posts/",
+  {
+    method: "POST",
+  },
+  {
+    immediate: false,
+    onSuccess: () => {
+      vSuccess("작성완료!");
+      router.push({ name: "PostList" });
+    },
+    onError: (err) => {
+      vAlert(err.message);
+    },
   }
+);
+const save = async () => {
+  execute({ ...form.value, createdAt: dayjs().format("YYYY-MM-DD") });
 };
+
+// const save = async () => {
+//   try {
+//     loading.value = true;
+//     await createPost({
+//       ...form.value,
+//       createdAt: dayjs().format("YYYY-MM-DD"),
+//     });
+//     vSuccess("작성완료!");
+//     router.push({ name: "PostList" });
+//   } catch (err) {
+//     vAlert(err);
+//     error.value = err;
+//   } finally {
+//     loading.value = false;
+//   }
+// };
 const goList = () => {
   router.push({
     name: "PostList",

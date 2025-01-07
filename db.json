@@ -7,12 +7,6 @@
       "id": 1
     },
     {
-      "title": "제목없음",
-      "content": "내용 무",
-      "createdAt": "2025-03-01",
-      "id": 4
-    },
-    {
       "title": "테스트",
       "content": "테스트 서버입니다\n",
       "createdAt": "2025-01-03",
@@ -55,40 +49,37 @@
       "id": 22
     },
     {
-      "title": "ㅅㅅㅅ",
-      "content": "ㅅㅅㅅㅅㅅ",
-      "createdAt": "2025-01-05",
-      "id": 23
+      "id": 25
     },
     {
-      "title": "ㅕ셔",
-      "content": "럳러\n",
-      "createdAt": "2025-01-06",
-      "id": 31
-    },
-    {
-      "title": "ㅅㅅ",
-      "content": "ㅅ쇼",
-      "createdAt": "2025-01-06",
-      "id": 32
+      "title": "654",
+      "content": "6346",
+      "createdAt": "2025-01-07",
+      "id": 26
     },
     {
       "title": null,
       "content": null,
-      "createdAt": "2025-01-06",
+      "createdAt": "2025-01-07",
+      "id": 30
+    },
+    {
+      "title": null,
+      "content": null,
+      "createdAt": "2025-01-07",
+      "id": 31
+    },
+    {
+      "title": null,
+      "content": null,
+      "createdAt": "2025-01-07",
+      "id": 32
+    },
+    {
       "id": 33
     },
     {
-      "title": "tt",
-      "content": "tt",
-      "createdAt": "2025-01-06",
       "id": 34
-    },
-    {
-      "title": "dfgdfg",
-      "content": "fgfg",
-      "createdAt": "2025-01-06",
-      "id": 35
     }
   ]
 }

@@ -87,11 +87,12 @@ import { getPosts } from "@/api/posts";
 import { useRouter } from "vue-router";
 import AppLoading from "@/components/app/AppLoading.vue";
 import AppError from "@/components/app/AppError.vue";
+import { useAxios } from "@/hooks/useAxios.js";
 
 const router = useRouter();
-const loading = ref(false);
-const error = ref(null);
-const posts = ref([]);
+// const loading = ref(false);
+// const error = ref(null);
+// const posts = ref([]);
 const params = ref({
   _sort: "createdAt",
   _order: "desc",
@@ -100,25 +101,36 @@ const params = ref({
   title_like: "",
 });
 
+const {
+  data: posts,
+  response,
+  loading,
+  error,
+} = useAxios("/posts", { params });
+
 // 페이징 관련
 
-const totalCount = ref(0); // 전체 게시글 수
+// const totalCount = ref(0); // 전체 게시글 수
+const totalCount = computed(() => {
+  return response.value.headers["x-total-count"];
+});
 const pageCount = computed(() => {
   return Math.ceil(totalCount.value / params.value._limit);
 });
-const fetchPosts = async () => {
-  try {
-    loading.value = true;
-    console.log("요청보냄");
-    const { data, headers } = await getPosts(params.value);
-    posts.value = data;
-    totalCount.value = headers["x-total-count"];
-  } catch (err) {
-    error.value = err;
-  } finally {
-    loading.value = false;
-  }
-};
+
+// const fetchPosts = async () => {
+//   try {
+//     loading.value = true;
+//     console.log("요청보냄");
+//     const { data, headers } = await getPosts(params.value);
+//     posts.value = data;
+//     totalCount.value = headers["x-total-count"];
+//   } catch (err) {
+//     error.value = err;
+//   } finally {
+//     loading.value = false;
+//   }
+// };
 
 // 모달 관련
 const show = ref(false);
@@ -133,7 +145,7 @@ const openModal = ({ title, content, createdAt }) => {
 };
 
 // fetchPosts();
-watchEffect(fetchPosts);
+// watchEffect(fetchPosts);
 const goPage = (id) => {
   router.push({
     //주소값에 이름이 있다면 주소값으로 객체를 넣어줄수도 있다
