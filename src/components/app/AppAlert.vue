@@ -20,10 +20,14 @@
 </template>
 
 <script setup>
+import useAlert from "@/composables/alert";
+
 // import { computed } from "vue";
-defineProps({
-  items: Array,
-});
+// defineProps({
+//   items: Array,
+// });
+const { alerts: items } = useAlert();
+
 // const props = defineProps({
 //   show: {
 //     type: Boolean,

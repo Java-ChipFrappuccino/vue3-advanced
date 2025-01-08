@@ -6,7 +6,10 @@
     </p>
     <p class="text-muted">{{ createdAt }}</p>
     <template #footer>
-      <div class="d-flex flex-row-reverse">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0 me-2" @click.stop="$emit('preview')">
+          <i class="bi bi-caret-down"></i>
+        </button>
         <button class="btn p-0" @click.stop="$emit('modal')">
           <i class="bi bi-card-text"></i>
         </button>
@@ -23,7 +26,7 @@ defineProps({
   content: String,
   createdAt: [String, Date, Number],
 });
-defineEmits(["modal"]);
+defineEmits(["modal", "preview"]);
 </script>
 
 <style scoped></style>

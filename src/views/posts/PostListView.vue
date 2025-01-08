@@ -33,6 +33,7 @@
             :created-at="item.createdAt"
             @click="goPage(item.id)"
             @modal="openModal(item)"
+            @preview="selectPreview(item.id)"
           />
         </template>
       </AppGrid>
@@ -68,8 +69,8 @@
       ></PostModal>
     </Teleport>
     <hr class="my-4" />
-    <AppCard>
-      <PostDetailView :id="1" />
+    <AppCard v-if="previewId">
+      <PostDetailView :id="previewId" />
     </AppCard>
   </div>
 </template>
@@ -100,6 +101,11 @@ const params = ref({
   _limit: 3,
   title_like: "",
 });
+
+const previewId = ref(null);
+const selectPreview = (id) => {
+  previewId.value = id;
+};
 
 const {
   data: posts,

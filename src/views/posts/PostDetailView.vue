@@ -3,6 +3,7 @@
   <AppError v-else-if="error" :message="error.message"></AppError>
   <div v-else>
     <h2>{{ post.title }}</h2>
+    <p>id: {{ props.id }} , isOdd: {{ isOdd }}</p>
     <p>{{ post.content }}</p>
     <p class="text-muted">{{ $dayjs(post.createdAt).format("YYYY-MM-DD") }}</p>
     <hr class="my-4" />
@@ -44,12 +45,14 @@
 
 <script setup>
 import { deletePost, getPostById } from "@/api/posts";
-import { ref } from "vue";
+import { computed, ref, toRef } from "vue";
 import { useRouter } from "vue-router";
 import useAlert from "@/composables/alert";
 import AppLoading from "@/components/app/AppLoading.vue";
 import AppError from "@/components/app/AppError.vue";
 import { useAxios } from "@/hooks/useAxios.js";
+import { useNumber } from "@/composables/number";
+
 const router = useRouter();
 // const post = ref({});
 const { vAlert, vSuccess } = useAlert();
@@ -61,8 +64,12 @@ const props = defineProps({
     required: true,
   },
 });
+const { isOdd } = useNumber(toRef(props, "id"));
+console.log(isOdd);
+console.log(isOdd.value);
 
-const { data: post, loading, error } = useAxios(`/posts/${props.id}`);
+const url = computed(() => `/posts/${props.id}`);
+const { data: post, loading, error } = useAxios(url);
 
 // const fetchPost = async () => {
 //   try {
